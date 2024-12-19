@@ -1,0 +1,92 @@
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">Expense Tracker</h1>
+        
+        <!-- Form Section -->
+        <div class="card mb-4">
+            <div class="card-header">Add Income/Expense</div>
+            <div class="card-body">
+                <form (ngSubmit)="addTransaction()">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" [(ngModel)]="transaction.amount" name="amount" placeholder="Amount" required>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" [(ngModel)]="transaction.category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" [(ngModel)]="transaction.date" name="date" required>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">Add Transaction</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Total Income</h5>
+                        <h3 style="color:rgb(46, 46, 131)">{{ totalIncome }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Total Expenses</h5>
+                        <h3 style="color:rgb(235, 92, 116)">{{ totalExpenses }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Balance</h5>
+                        <h3 style="color:rgb(46, 145, 46)">{{ balance }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Table -->
+        <div class="card">
+            <div class="card-header">Transactions</div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let trans of transactions; let i = index">
+                            <td>{{ trans.amount }}</td>
+                            <td>{{ trans.category }}</td>
+                            <td>{{ trans.date }}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" (click)="editTransaction(i)">Edit</button>&nbsp;&nbsp;
+                                <button class="btn btn-danger btn-sm" (click)="deleteTransaction(i)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+ 
+</body>
+
